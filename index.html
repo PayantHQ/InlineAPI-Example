@@ -1,0 +1,36 @@
+<form>
+    <script src="https://api.payant.ng/assets/js/inline.min.js"></script>
+    <button type="button" onclick="payWithPayant()"> Pay </button> 
+</form>
+
+<script>
+    function payWithPayant() {
+        var handler = Payant.invoice({
+            "key": "PUBLIC-KEY",
+            "client": {
+                "first_name": "Albert",
+                "last_name": "Jane",
+                "email": "albert.jane@domain.com",
+                "phone": "+2348012345678"
+            },
+            "due_date": "12/30/2019",
+            "fee_bearer": "client",
+            "items": [
+                {
+                    "item": "Donuts",
+                    "description": "The best donuts in the world!",
+                    "unit_cost": "1000.00",
+                    "quantity": "1"
+                }
+            ],
+            callback: function(response) {
+                console.log(response);
+            },
+            onClose: function() {
+                console.log('Window Closed.');
+            }
+        });
+
+        handler.openIframe();
+    }
+</script>
